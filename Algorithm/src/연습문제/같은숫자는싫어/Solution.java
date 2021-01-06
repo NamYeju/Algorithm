@@ -1,22 +1,19 @@
-package ¿¬½À¹®Á¦.°°Àº¼ıÀÚ´Â½È¾î;
+package ì—°ìŠµë¬¸ì œ.ê°™ì€ìˆ«ìëŠ”ì‹«ì–´;
 
 import java.util.*;
 
 public class Solution {
 	
-	public static void main(String[] args) {
-		int arr[]= {4,4,4,3,3};
-		
-		System.out.print(solution(arr));
-	}
-	
-    public static int[] solution(int []arr) {
+    public int[] solution(int []arr) {
         
         ArrayList<Integer> arr2 = new ArrayList<Integer>();
         for(int i=1; i<arr.length; i++) {
         	
         	if(arr[i-1] != arr[i]) {
         		arr2.add(arr[i-1]);
+        	}
+		if(i==arr.length-1) {
+        		arr2.add(arr[i]);
         	}
         	
         }
