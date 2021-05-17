@@ -22,11 +22,9 @@ public class Main {
 				else
 					score = 0;
 			}
-
 			System.out.println(finalscore);
 		}
-		
-		
+				
 	}
 
 }
