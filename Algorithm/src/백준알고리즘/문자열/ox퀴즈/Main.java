@@ -4,21 +4,26 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String args[]) {
-		int num;
-		int score=0;
 		Scanner sc = new Scanner(System.in);
-		num = sc.nextInt();
-		String[] str = new String[num];
-		int[] answer = new int[num];
+		String[] str = new String[sc.nextInt()];
+
 		for(int i=0; i<str.length; i++) {
-			str[i] = sc.nextLine();
-			for(int j=0; j<str[i].length();j++) {
-				if(j=='o')
+			str[i] = sc.next();
+		}
+		for(int j=0; j<str.length;j++) {
+			int score=0,finalscore=0;
+
+			for(int i=0;i<str[j].length();i++) {
+				System.out.println(str[j].charAt(i));
+				if(str[j].charAt(i)=='O') {
 					score++;
+					finalscore+=score;
+				}
 				else
 					score = 0;
 			}
-			answer[i] = score;
+
+			System.out.println(finalscore);
 		}
 		
 		
