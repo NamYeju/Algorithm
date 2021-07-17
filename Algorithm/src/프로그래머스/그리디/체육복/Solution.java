@@ -8,47 +8,60 @@ import java.util.ArrayList;
  전체학생중 lost/reverse 둘중 아무것도 해당안되는 학생  //2
  추가학생:
  reserve의 -1 +1 학생번호중 lost번호와 일치하는 //3
+ 단 reverse와 lost에 모두 포함되면 reverse에서 제거해야됨
  * */
 class Solution {
 	public static void main(String args[]) {
 		int []lost = {3};
-		int []reserve = {1};
+		int []reserve = {3};
 		System.out.println(solution(3, lost, reserve));
 		}
     public static int solution(int n, int[] lost, int[] reserve) {
         int answer = 0;
-        ArrayList<Integer>arr = new ArrayList<Integer>(); //lost인 애들이 빌려야 할 학생번호
-        ArrayList<Integer>arr2 = new ArrayList<Integer>();
-        answer += n-lost.length; //1,2
-        //3
-        for(int i=0; i<lost.length; i++) {
-        	if(lost[i] == 1) 
-        		arr.add(lost[i]+1);
-        	else if(lost[i]>1 && lost[i]<n) {        	
-        		arr.add(lost[i]-1);
-        		arr.add(lost[i]+1);
-        	}
-        	else if(lost[i] == n)
-        		arr.add(lost[i]-1);
-        	
-        }
-
-        for(int i=0; i<arr.size(); i++) {
-        	for(int j=0; j<reserve.length; j++) {
-        		if(arr.get(i) == reserve[j])
-        			arr2.add(Integer.valueOf(arr.get(i)));
-        	}
-        }
+        ArrayList<Integer>lost_arr = new ArrayList<Integer>();
+        ArrayList<Integer>reserve_arr = new ArrayList<Integer>();
         
-        for(int i=0; i<lost.length;i++) {
-        	if(arr2.contains(lost[i]-1)) {
-        		while(arr2.remove(Integer.valueOf(lost[i]-1))) {};
-        		answer+=1;
+        answer += n-lost.length; //1,2
+        
+        for(int i=0; i<lost.length; i++) {
+        	lost_arr.add(lost[i]);
+        }
+        for(int i=0; i<reserve.length; i++) {
+        	reserve_arr.add(reserve[i]);
+        }
+        for(int i=0; i<reserve_arr.size(); i++) {
+        	if(lost_arr.contains(reserve_arr.get(i))) {
+        		lost_arr.set(lost_arr.indexOf(reserve_arr.get(i)), -1);
+        		reserve_arr.set(reserve_arr.indexOf(reserve_arr.get(i)), -1);
+        		answer++;
         	}
-        	else if(arr2.contains(lost[i]+1)) {
-        		while(arr2.remove(Integer.valueOf(lost[i]+1))) {};
-        		answer+=1;
+        }
+    
+        //3
+        for(int i=0; i<lost_arr.size(); i++) {
+        	if(lost_arr.get(i) == 1) {
+        		if(reserve_arr.contains(lost_arr.get(i)+1)) {
+        			reserve_arr.remove(Integer.valueOf(lost_arr.get(i)+1));
+        			answer++;
+        		}
         	}
+        	else if(lost_arr.get(i)>1 && lost_arr.get(i)<n) {        	
+        		if(reserve_arr.contains(lost_arr.get(i)-1)){
+        			reserve_arr.remove(Integer.valueOf(lost_arr.get(i)-1));
+        			answer++;
+        		}
+        		else if(reserve_arr.contains(lost_arr.get(i)+1)){
+        			reserve_arr.remove(Integer.valueOf(lost_arr.get(i)+1));
+        			answer++;
+        			
+        		}
+        	}
+        	else if(lost_arr.get(i) == n)
+        		if(reserve_arr.contains(lost_arr.get(i)-1)){
+        			reserve_arr.remove(Integer.valueOf(lost_arr.get(i)-1));
+        			answer++;
+        		}
+        	
         }
         
         return answer;
