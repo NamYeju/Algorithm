@@ -1,86 +1,33 @@
-package ÇÁ·Î±×·¡¸Ó½º.Á¤·Ä.°¡ÀåÅ«¼ö;
+package Algorithm.src.í”„ë¡œê·¸ë˜ë¨¸ìŠ¤.ì •ë ¬.ê°€ì¥í°ìˆ˜;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Solution {
-	public static void main(String args[]) {
-		int[] numbers = {3,30,34,5,9};
-		System.out.print(solution(numbers));
-	}
+    public static  void main(String args[]){
+        int numbers[] = {6,10,2};
+        solution(numbers);
+    }
     public static String solution(int[] numbers) {
         String answer = "";
-        ArrayList <Integer> list = new ArrayList<Integer>();
-        //¹è¿­ ¿ø¼ÒÀÇ ¸Ç ¾ÕÀÚ¸® ¼ıÀÚ ºñ±³
-        int temp=0;
-        int pos=0;
-        int compare=0;
-        for(int i=numbers.length-1; i>0; i--) {
-        	for(int j=0;j<i;j++) {
-        		
-        		
-        		if(numbers[j]>=0&&numbers[j]<10)
-        			pos = numbers[j];
-        		if(numbers[j]>=10&&numbers[j]<100)
-        			pos = numbers[j]/10;
-        		if(numbers[j]>=100&&numbers[j]<1000)
-        			pos = numbers[j]/100;
-        		if(numbers[j]==1000)
-        			pos = numbers[j]/1000;
-        		
-        		if(numbers[j+1]>=0&&numbers[j+1]<10)
-        			compare = numbers[j+1];
-        		if(numbers[j+1]>=10&&numbers[j+1]<100)
-        			compare = numbers[j+1]/10;
-        		if(numbers[j+1]>=100&&numbers[j+1]<1000)
-        			compare = numbers[j+1]/100;
-        		if(numbers[j+1]==1000)
-        			compare = numbers[j+1]/1000;
-        			
-        			
-        		if(pos > compare) {
-        			temp = pos;
-        			pos = compare;
-        			compare = temp;
-        		}
-        		if(pos == compare) {
-            		if(numbers[j]%10 > numbers[j+1]%10) {
-            			temp = numbers[j];
-            			numbers[j] = numbers[j+1];
-            			numbers[j+1] = temp;
-            		}
-        		}
-        	}
+        String[] str = new String[numbers.length];
+
+        for(int i=0; i<numbers.length; i++){
+            str[i] = String.valueOf(numbers[i]);
         }
-        for(int i=0; i<numbers.length; i++) {
-        	System.out.print(numbers[i]+"\n");
+        Arrays.sort(str, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return (o2+o1).compareTo(o1+o2);
+            }
+        });
+        if(str[0].equals(0))
+            return "0";
+        else{
+            for(int i=0; i<str.length; i++){
+                answer += str[i];
+            }
         }
         return answer;
     }
-
 }
-/*
- ÀÏÀÇ ÀÚ¸® ¼öµç, ¹éÀÇÀÚ¸®¼öµç, ¸Ç ¾Õ ¼ıÀÚ°¡ Á¦ÀÏ Å«°ÅºÎÅÍ ¿Í¾ßµÊ
- ¸¸¾à ¼ıÀÚ°¡ °°´Ù¸é ±× ´ÙÀ½ ¼ıÀÚ ºñ±³
- 0Àº nullº¸´Ù ÇÏÀ§·Î Ãë±Ş  (3, 30)-> 330
- ³ª¸ÓÁö´Â À§ÀÇ ¿ø¸®¿Í µ¿ÀÏ (30, 3052)-> 5°¡ nullº¸´Ù Å©¹Ç·Î 305230 
- 30 = 3*10 => 30/10
- 301 = 3*100+1 => (301-1)/10^2
- ---
- ±âº»ÀûÀÎ ·ÎÁ÷
- 3 30 34 5 9
- s1 [3]
- s2 [3][0]
- s3 [3][4]
- s4 [5]
- s5 [9]
- 
- 1. 0¹øÂ° ÀÎµ¦½º ºñ±³ s5, s4
- 2. °°Àº ÀÎµ¦½º(3) Á¸Àç½Ã ´ÙÀ½ ÀÎµ¦½º ºñ±³ s3, s2
- (¸¸¾à¿¡ ÀÎµ¦½º´Â °°Àºµ¥ ±æÀÌ°¡ Á¦ÀÏ ÂªÀ¸¸é °¡Àå ³ôÀº ¿ì¼±¼øÀ§ => s1,s3,s2)
- 
- ===> s5 s4 s1 s3 s2 
- 
- ±×·¸´Ù¸é °¢ ¼ö¸¦ °¢°¢ ¹è¿­¿¡ ³Ö´Â ¹æ¹ıÀº? while ³ª¸ÓÁö°¡ 10º¸´Ù ÀÛÀ» ¶§ ±îÁö
- 
- 
-*/
