@@ -9,9 +9,6 @@ public class Solution {
 		int zero_num = 0;
 		int same_num = 0;
 
-		Arrays.sort(lottos);
-		Arrays.sort(win_nums);
-
 		for(int lotto : lottos){
 			if(lotto == 0) {
 				zero_num++;
