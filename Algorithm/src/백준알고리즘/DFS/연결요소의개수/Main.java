@@ -45,7 +45,6 @@ public class Main {
 						stack.push(graph[item].get(i));
 						visited[graph[item].get(i)] = Boolean.TRUE;
 						trueCnt++;
-						break;
 					}
 				}
 			}
