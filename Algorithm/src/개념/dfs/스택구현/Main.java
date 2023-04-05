@@ -22,8 +22,6 @@ public class Main {
 		}
 		// 방문배열 초기화
 		Boolean visited[] = new Boolean[V + 1];
-		for (int i = 0; i < visited.length; i++)
-			visited[i] = false;
 
 		// 스택에 탐색 시작 노드 삽입
 		Stack stack = new Stack();
