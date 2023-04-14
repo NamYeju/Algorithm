@@ -16,9 +16,9 @@ public class Solution {
 		M = maps[0].length-1;
 		isVisited = new boolean[maps.length][maps[0].length];
 		Node node = new Node(0, 0, 1);
-		return answer = DFS(maps, node);
+		return answer = BFS(maps, node);
 	}
-	public static int DFS(int[][] maps, Node node){
+	public static int BFS(int[][] maps, Node node){
 		Queue<Node> queue = new LinkedList();
 		queue.add(node);
 		isVisited[node.x][node.y] = true;
