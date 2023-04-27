@@ -1,4 +1,4 @@
-package Algorithm.src.프로그래머스.배열.별찍기;
+package Algorithm.src.프로그래머스.배열.교점에별만들기;
 
 import java.util.*;
 
